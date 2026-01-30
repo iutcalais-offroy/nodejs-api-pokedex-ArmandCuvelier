@@ -146,7 +146,7 @@ export const authenticateToken = (req: Request,res: Response,next: NextFunction)
         }
 
         // 4. Passer au prochain middleware ou à la route
-        next()
+        return next()
     } catch (error) {
         return res.status(403).json({error: 'Token invalide ou expiré'})
     }
