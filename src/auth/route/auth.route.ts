@@ -63,7 +63,7 @@ authRouter.post('/sign-up', async (req: Request, res: Response) => {
     }
 })
 
-// POST /auth/sign-up
+// POST /auth/sign-in
 authRouter.post('/sign-in', async (req: Request, res: Response) => {
     try {
         const {email, password} = req.body
