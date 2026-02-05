@@ -140,10 +140,8 @@ export const authenticateToken = (req: Request,res: Response,next: NextFunction)
         }
 
         // 3. Ajouter userId à la requête pour l'utiliser dans les routes
-        req.user = {
-            userId: decoded.userId,
-            email: decoded.email
-        }
+        req.userId = decoded.userId;
+
 
         // 4. Passer au prochain middleware ou à la route
         return next()
