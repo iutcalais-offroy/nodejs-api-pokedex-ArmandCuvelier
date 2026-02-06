@@ -6,7 +6,27 @@ import 'dotenv/config'
 
 export const authRouter = Router()
 
-// Post auth/sign-up
+
+/**
+ * Route d'inscription d'un nouvel utilisateur.
+ *
+ * @route POST /auth/sign-up
+ *
+ * @param {Request} req - Requête HTTP Express
+ * @param {Object} req.body - Corps de la requête
+ * @param {string} req.body.email - Adresse email de l'utilisateur
+ * @param {string} req.body.username - Nom d'utilisateur
+ * @param {string} req.body.password - Mot de passe en clair
+ *
+ * @param {Response} res - Réponse HTTP Express
+ *
+ * @returns {Response} 201 - Utilisateur créé avec succès et JWT
+ * @returns {Response} 400 - Champs manquants
+ * @returns {Response} 409 - Email déjà utilisé
+ * @returns {Response} 500 - Erreur serveur
+ *
+ * @throws {Error} Erreur lors de l'accès à la base de données ou du hashage
+ */
 authRouter.post('/sign-up', async (req: Request, res: Response) => {
     try {
         const {email, username, password} = req.body
@@ -63,7 +83,25 @@ authRouter.post('/sign-up', async (req: Request, res: Response) => {
     }
 })
 
-// POST /auth/sign-in
+/**
+ * Route de connexion d'un utilisateur existant.
+ *
+ * @route POST /auth/sign-in
+ *
+ * @param {Request} req - Requête HTTP Express
+ * @param {Object} req.body - Corps de la requête
+ * @param {string} req.body.email - Adresse email de l'utilisateur
+ * @param {string} req.body.password - Mot de passe en clair
+ *
+ * @param {Response} res - Réponse HTTP Express
+ *
+ * @returns {Response} 200 - Connexion réussie avec JWT
+ * @returns {Response} 400 - Champs manquants
+ * @returns {Response} 401 - Identifiants incorrects
+ * @returns {Response} 500 - Erreur serveur
+ *
+ * @throws {Error} Erreur lors de la comparaison du mot de passe ou accès DB
+ */
 authRouter.post('/sign-in', async (req: Request, res: Response) => {
     try {
         const {email, password} = req.body
@@ -123,6 +161,22 @@ declare global {
     }
 }
 
+/**
+ * Middleware d'authentification JWT.
+ *
+ * Vérifie la présence et la validité du token JWT
+ * et ajoute l'identifiant utilisateur à la requête.
+ *
+ * @param {Request} req - Requête HTTP Express
+ * @param {Response} res - Réponse HTTP Express
+ * @param {NextFunction} next - Fonction middleware suivante
+ *
+ * @returns {Response} 401 - Token manquant
+ * @returns {Response} 403 - Token invalide ou expiré
+ * @returns {void} Passe au middleware suivant si valide
+ *
+ * @throws {Error} Erreur lors de la vérification du token
+ */
 export const authenticateToken = (req: Request,res: Response,next: NextFunction) => {
     // 1. Récupérer le token depuis l'en-tête Authorization
     const authHeader = req.headers.authorization

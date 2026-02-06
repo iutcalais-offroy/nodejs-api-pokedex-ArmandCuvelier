@@ -4,7 +4,21 @@ import {prisma} from "../database"
 
 export const cardsRouter = Router()
 
-// Get /cards
+/**
+ * Route de récupération de toutes les cartes.
+ *
+ * Les cartes sont retournées triées par numéro de Pokédex croissant.
+ *
+ * @route GET /cards
+ *
+ * @param {Request} _req - Requête HTTP Express
+ * @param {Response} res - Réponse HTTP Express
+ *
+ * @returns {Response} 200 - Liste des cartes
+ * @returns {Response} 500 - Erreur serveur
+ *
+ * @throws {Error} Erreur lors de l'accès à la base de données
+ */
 cardsRouter.get('/cards', async(_req: Request, res: Response) => {
     try {
 

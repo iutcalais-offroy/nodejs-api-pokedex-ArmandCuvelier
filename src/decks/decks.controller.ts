@@ -3,7 +3,24 @@ import { decksService } from './decks.service.js';
 
 export const decksController = {
 
-    //create the decks
+    /**
+     * Créer un nouveau deck pour l'utilisateur authentifié.
+     *
+     * @param {Request} req - Requête HTTP Express
+     * @param {number} req.userId - Identifiant de l'utilisateur (injecté par le middleware JWT)
+     * @param {Object} req.body - Corps de la requête
+     * @param {string} req.body.name - Nom du deck
+     * @param {number[]} req.body.cards - Liste de 10 identifiants de cartes
+     *
+     * @param {Response} res - Réponse HTTP Express
+     *
+     * @returns {Response} 201 - Deck créé avec succès
+     * @returns {Response} 400 - Données invalides
+     * @returns {Response} 401 - Utilisateur non authentifié
+     * @returns {Response} 500 - Erreur serveur
+     *
+     * @throws {Error} Cartes non existantes
+     */
     async create(_req: Request, res: Response){
         try{
 
@@ -45,7 +62,19 @@ export const decksController = {
         }
     },
 
-    // list the deck of the user
+    /**
+     * Récupérer tous les decks de l'utilisateur authentifié.
+     *
+     * @param {Request} req - Requête HTTP Express
+     * @param {number} req.userId - Identifiant de l'utilisateur
+     * @param {Response} res - Réponse HTTP Express
+     *
+     * @returns {Response} 200 - Liste des decks
+     * @returns {Response} 401 - Utilisateur non authentifié
+     * @returns {Response} 500 - Erreur serveur
+     *
+     * @throws {Error} Erreur lors de la récupération des decks
+     */
     async liste(_req: Request, res: Response){
         try {
             const id = _req.userId;
@@ -63,7 +92,25 @@ export const decksController = {
         }
     },
 
-    // get the decks of the user depends of the deck id's
+    /**
+     * Récupérer un deck par son identifiant.
+     *
+     * Vérifie que le deck existe et appartient à l'utilisateur.
+     *
+     * @param {Request} req - Requête HTTP Express
+     * @param {number} req.userId - Identifiant de l'utilisateur
+     * @param {string} req.params.id - Identifiant du deck
+     * @param {Response} res - Réponse HTTP Express
+     *
+     * @returns {Response} 200 - Deck trouvé
+     * @returns {Response} 401 - Non authentifié
+     * @returns {Response} 403 - Accès refusé
+     * @returns {Response} 404 - Deck non trouvé
+     * @returns {Response} 500 - Erreur serveur
+     *
+     * @throws {Error} Deck non trouvé
+     * @throws {Error} Accès refusé
+     */
     async read(_req: Request, res: Response){
         try {
             const id_user = _req.userId;
@@ -90,7 +137,28 @@ export const decksController = {
         }
     },
 
-    // update the deck depends of id, of the user
+    /**
+     * Mettre à jour un deck existant.
+     *
+     * Permet de modifier le nom et/ou les cartes du deck.
+     *
+     * @param {Request} req - Requête HTTP Express
+     * @param {number} req.userId - Identifiant de l'utilisateur
+     * @param {string} req.params.id - Identifiant du deck
+     * @param {Object} req.body - Données de mise à jour
+     * @param {string} [req.body.name] - Nouveau nom du deck
+     * @param {number[]} [req.body.cards] - Nouvelle liste de cartes
+     * @param {Response} res - Réponse HTTP Express
+     *
+     * @returns {Response} 200 - Deck mis à jour
+     * @returns {Response} 400 - Données invalides
+     * @returns {Response} 401 - Non authentifié
+     * @returns {Response} 403 - Accès refusé
+     * @returns {Response} 404 - Deck non trouvé
+     * @returns {Response} 500 - Erreur serveur
+     *
+     * @throws {Error} Erreurs métier liées aux règles de mise à jour
+     */
     async update(_req: Request, res: Response){
         try {
             const id_user = _req.userId;
@@ -137,7 +205,23 @@ export const decksController = {
         }
     },
 
-    // delete a deck only if it's an deck of the user
+    /**
+     * Supprimer un deck appartenant à l'utilisateur authentifié.
+     *
+     * @param {Request} req - Requête HTTP Express
+     * @param {number} req.userId - Identifiant de l'utilisateur
+     * @param {string} req.params.id - Identifiant du deck
+     * @param {Response} res - Réponse HTTP Express
+     *
+     * @returns {Response} 200 - Deck supprimé avec succès
+     * @returns {Response} 401 - Non authentifié
+     * @returns {Response} 403 - Accès refusé
+     * @returns {Response} 404 - Deck non trouvé
+     * @returns {Response} 500 - Erreur serveur
+     *
+     * @throws {Error} Deck non trouvé
+     * @throws {Error} Accès refusé
+     */
     async delete(_req: Request, res: Response){
         try {
             const id_user = _req.userId;
