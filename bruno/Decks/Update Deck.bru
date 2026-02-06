@@ -10,6 +10,10 @@ patch {
   auth: bearer
 }
 
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+}
+
 auth:bearer {
   token: {{token}}
 }
@@ -17,22 +21,27 @@ auth:bearer {
 body:json {
   {
     "name": "Updated Deck Name",
-    "cards": [6, 9, 12, 15, 18, 21, 24, 27, 30, 33]
+    "cards": [693, 709, 718, 723, 723, 734, 751, 654, 667,688]
   }
+}
+
+vars:pre-request {
+  deckId: 8
+  baseUrl: http://localhost:3001
 }
 
 docs {
   Update an existing deck.
-
+  
   Requires authentication and deck ownership.
-
+  
   Variables needed:
   - deckId: The ID of the deck to update (get from Get My Decks response)
-
+  
   Body:
   - name: string (optional) - New name for the deck
   - cards: array of numbers (optional) - Must be exactly 10 valid card IDs if provided
-
+  
   Returns:
   - 200: Deck updated successfully
   - 400: Invalid input (must be exactly 10 valid card IDs if cards provided)

@@ -10,8 +10,16 @@ get {
   auth: bearer
 }
 
+headers {
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+}
+
 auth:bearer {
   token: {{token}}
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:3001
 }
 
 script:post-response {
@@ -22,9 +30,9 @@ script:post-response {
 
 docs {
   Get all decks belonging to the authenticated user.
-
+  
   Requires authentication.
-
+  
   Returns:
   - 200: List of user's decks (automatically saves first deck's ID to deckId variable)
   - 401: Unauthorized
