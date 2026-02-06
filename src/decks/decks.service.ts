@@ -9,7 +9,7 @@ export const decksService = {
         for (let index = 0; index < cards.length; index++) {
             let element = cards[index]
             if (await decksRepository.existCards(element)==false){
-                return error("Cartes non existantes")
+                throw error("Cartes non existantes");
             }
         }
 
