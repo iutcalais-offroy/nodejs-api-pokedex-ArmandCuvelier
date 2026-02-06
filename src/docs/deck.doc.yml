@@ -1,0 +1,356 @@
+paths:
+  /decks:
+    post:
+      tags:
+        - Decks
+      summary: Créer un nouveau deck
+      description: Crée un deck pour l'utilisateur authentifié
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeckInput'
+            examples:
+              basicDeck:
+                summary: Création d'un deck basique
+                value:
+                  name: "Starter Deck"
+                  cardIds: [1, 5, 12, 23, 34]
+              advancedDeck:
+                summary: Création d'un deck avancé
+                value:
+                  name: "Dragon Deck"
+                  cardIds: [2, 4, 7, 9, 11, 15, 18, 22, 25, 28]
+      responses:
+        '201':
+          description: Deck créé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deck'
+              examples:
+                success:
+                  summary: Deck créé
+                  value:
+                    id: 5
+                    name: "Starter Deck"
+                    userId: 9
+                    createdAt: "2026-01-30T12:53:47.228Z"
+                    updatedAt: "2026-01-30T12:53:47.228Z"
+        '400':
+          description: Données invalides
+          content:
+            application/json:
+              examples:
+                missingName:
+                  summary: Nom manquant
+                  value:
+                    error: "Le nom du deck est requis"
+                invalidCards:
+                  summary: IDs de cartes invalides
+                  value:
+                    error: "Les IDs de cartes doivent être un tableau d'entiers"
+        '401':
+          description: Non authentifié
+          content:
+            application/json:
+              examples:
+                noToken:
+                  summary: Token manquant
+                  value:
+                    error: "Token d'authentification requis"
+        '500':
+          description: Erreur serveur
+          content:
+            application/json:
+              examples:
+                serverError:
+                  summary: Erreur interne
+                  value:
+                    error: "Une erreur est survenue lors de la création du deck"
+
+  /decks/mine:
+    get:
+      tags:
+        - Decks
+      summary: Récupérer les decks de l'utilisateur
+      description: Récupère tous les decks appartenant à l'utilisateur authentifié
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Liste des decks de l'utilisateur
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Deck'
+              examples:
+                multipleDecks:
+                  summary: Utilisateur avec plusieurs decks
+                  value:
+                    - id: 5
+                      name: "Starter Deck"
+                      userId: 9
+                      createdAt: "2026-01-30T12:53:47.228Z"
+                      updatedAt: "2026-01-30T12:53:47.228Z"
+                    - id: 8
+                      name: "Updated Deck Name"
+                      userId: 9
+                      createdAt: "2026-02-05T19:51:44.966Z"
+                      updatedAt: "2026-02-05T20:34:06.457Z"
+                noDecks:
+                  summary: Utilisateur sans decks
+                  value: []
+        '401':
+          description: Non authentifié
+          content:
+            application/json:
+              examples:
+                unauthorized:
+                  summary: Token invalide
+                  value:
+                    error: "Token invalide ou expiré"
+        '500':
+          description: Erreur serveur
+          content:
+            application/json:
+              examples:
+                serverError:
+                  summary: Erreur interne
+                  value:
+                    error: "Impossible de récupérer les decks"
+
+  /decks/{id}:
+    get:
+      tags:
+        - Decks
+      summary: Récupérer un deck par ID
+      description: Récupère un deck appartenant à l'utilisateur
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          examples:
+            validId:
+              summary: ID valide
+              value: 5
+      responses:
+        '200':
+          description: Deck trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deck'
+              examples:
+                found:
+                  summary: Deck trouvé
+                  value:
+                    id: 5
+                    name: "Starter Deck"
+                    userId: 9
+                    createdAt: "2026-01-30T12:53:47.228Z"
+                    updatedAt: "2026-01-30T12:53:47.228Z"
+        '401':
+          description: Non authentifié
+          content:
+            application/json:
+              examples:
+                noAuth:
+                  summary: Non authentifié
+                  value:
+                    error: "Authentification requise"
+        '403':
+          description: Accès refusé
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  summary: Deck appartient à un autre utilisateur
+                  value:
+                    error: "Vous n'avez pas accès à ce deck"
+        '404':
+          description: Deck non trouvé
+          content:
+            application/json:
+              examples:
+                notFound:
+                  summary: Deck inexistant
+                  value:
+                    error: "Deck non trouvé"
+        '500':
+          description: Erreur serveur
+          content:
+            application/json:
+              examples:
+                serverError:
+                  summary: Erreur interne
+                  value:
+                    error: "Erreur lors de la récupération du deck"
+
+    patch:
+      tags:
+        - Decks
+      summary: Mettre à jour un deck
+      description: Modifie le nom et/ou les cartes d'un deck
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          examples:
+            validId:
+              summary: ID du deck à modifier
+              value: 8
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeckInput'
+            examples:
+              updateName:
+                summary: Modification du nom uniquement
+                value:
+                  name: "Updated Deck Name"
+              updateCards:
+                summary: Modification des cartes
+                value:
+                  name: "Updated Deck Name"
+                  cardIds: [3, 6, 9, 12, 15, 18]
+      responses:
+        '200':
+          description: Deck mis à jour
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Deck'
+              examples:
+                updated:
+                  summary: Deck mis à jour avec succès
+                  value:
+                    id: 8
+                    name: "Updated Deck Name"
+                    userId: 9
+                    createdAt: "2026-02-05T19:51:44.966Z"
+                    updatedAt: "2026-02-05T20:34:06.457Z"
+        '400':
+          description: Données invalides
+          content:
+            application/json:
+              examples:
+                invalidData:
+                  summary: Données incorrectes
+                  value:
+                    error: "Le nom du deck ne peut pas être vide"
+        '401':
+          description: Non authentifié
+          content:
+            application/json:
+              examples:
+                noAuth:
+                  summary: Token manquant
+                  value:
+                    error: "Authentification requise"
+        '403':
+          description: Accès refusé
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  summary: Pas le propriétaire
+                  value:
+                    error: "Vous ne pouvez modifier que vos propres decks"
+        '404':
+          description: Deck non trouvé
+          content:
+            application/json:
+              examples:
+                notFound:
+                  summary: Deck inexistant
+                  value:
+                    error: "Le deck avec l'ID 8 n'existe pas"
+        '500':
+          description: Erreur serveur
+          content:
+            application/json:
+              examples:
+                serverError:
+                  summary: Erreur interne
+                  value:
+                    error: "Erreur lors de la mise à jour du deck"
+
+    delete:
+      tags:
+        - Decks
+      summary: Supprimer un deck
+      description: Supprime un deck appartenant à l'utilisateur
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+          examples:
+            validId:
+              summary: ID du deck à supprimer
+              value: 5
+      responses:
+        '200':
+          description: Deck supprimé avec succès
+          content:
+            application/json:
+              examples:
+                deleted:
+                  summary: Suppression réussie
+                  value:
+                    message: "Deck supprimé avec succès"
+        '401':
+          description: Non authentifié
+          content:
+            application/json:
+              examples:
+                noAuth:
+                  summary: Non authentifié
+                  value:
+                    error: "Authentification requise"
+        '403':
+          description: Accès refusé
+          content:
+            application/json:
+              examples:
+                forbidden:
+                  summary: Deck d'un autre utilisateur
+                  value:
+                    error: "Vous ne pouvez supprimer que vos propres decks"
+        '404':
+          description: Deck non trouvé
+          content:
+            application/json:
+              examples:
+                notFound:
+                  summary: Deck inexistant
+                  value:
+                    error: "Deck non trouvé"
+        '500':
+          description: Erreur serveur
+          content:
+            application/json:
+              examples:
+                serverError:
+                  summary: Erreur lors de la suppression
+                  value:
+                    error: "Impossible de supprimer le deck"
