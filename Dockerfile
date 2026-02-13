@@ -10,6 +10,8 @@ ENV DATABASE_URL="postgresql://postgres:kRybtEvmGgHQxIzFPcdmnMKJbwfzFEDh@postgre
 
 RUN npx prisma generate
 
+RUN npm prisma db:migrate
+
 RUN npm run build
 
 CMD ["npm run start"]
