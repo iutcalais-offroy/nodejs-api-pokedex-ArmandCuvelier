@@ -1,5 +1,4 @@
 import { createServer } from 'http'
-import { env } from './env'
 import express from 'express'
 import cors from 'cors'
 import { authRouter } from './auth/route/auth.route'
@@ -10,6 +9,7 @@ import { swaggerDocument } from './docs'
 
 // Create Express app
 export const app = express()
+const PORT = process.env.PORT || 3000
 
 // Middlewares
 app.use(
@@ -49,10 +49,10 @@ if (require.main === module) {
 
   // Start server
   try {
-    httpServer.listen(env.PORT, () => {
-      console.log(`\n🚀 Server is running on http://localhost:${env.PORT}`)
+    httpServer.listen(PORT, () => {
+      console.log(`\n🚀 Server is running on http://localhost:${PORT}`)
       console.log(
-        `🧪 Socket.io Test Client available at http://localhost:${env.PORT}`,
+        `🧪 Socket.io Test Client available at http://localhost:${PORT}`,
       )
     })
   } catch (error) {
