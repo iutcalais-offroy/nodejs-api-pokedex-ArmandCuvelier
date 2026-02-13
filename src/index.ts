@@ -42,7 +42,7 @@ app.use('/api/auth', authRouter)
 app.use('/api/', cardsRouter)
 app.use('/api/', deckRouter)
 
-// Start server only if this file is run directly (not imported for tests)
+// Start server only if this file is run directly (not imported for the tests)
 if (require.main === module) {
   // Create HTTP server
   const httpServer = createServer(app)
