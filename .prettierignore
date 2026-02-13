@@ -4,5 +4,6 @@ build
 coverage
 .env
 public
-src/generated/
+src/generated/**
 commitlint.config.js
+tests
