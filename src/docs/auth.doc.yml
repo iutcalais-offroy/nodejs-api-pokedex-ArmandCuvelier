@@ -18,11 +18,11 @@ paths:
                 email:
                   type: string
                   format: email
-                  example: "red@example.com"
+                  example: 'red@example.com'
                 password:
                   type: string
                   format: password
-                  example: "password123"
+                  example: 'password123'
       responses:
         '200':
           description: Connexion réussie
@@ -33,10 +33,10 @@ paths:
                 properties:
                   message:
                     type: string
-                    example: "Connexion réussie"
+                    example: 'Connexion réussie'
                   token:
                     type: string
-                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksImVtYWlsIjoicmVkQGV4YW1wbGUuY29tIiwiaWF0IjoxNzcwMzk3NzAzLCJleHAiOjE3NzEwMDI1MDN9.r641SLQaUUFhzP1eKzb2ZWAYbUghZQ3TPovzsmCbYY0"
+                    example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksImVtYWlsIjoicmVkQGV4YW1wbGUuY29tIiwiaWF0IjoxNzcwMzk3NzAzLCJleHAiOjE3NzEwMDI1MDN9.r641SLQaUUFhzP1eKzb2ZWAYbUghZQ3TPovzsmCbYY0'
                   user:
                     $ref: '#/components/schemas/User'
         '401':

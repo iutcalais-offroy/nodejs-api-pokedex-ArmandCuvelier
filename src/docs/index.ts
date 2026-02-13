@@ -1,6 +1,6 @@
 import YAML from 'yamljs'
 import path from 'path'
-import {fileURLToPath} from 'url'
+import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -16,11 +16,11 @@ const deckDoc = YAML.load(path.join(__dirname, 'deck.doc.yml'))
 
 // Fusionner tous les paths
 export const swaggerDocument = {
-    ...swaggerConfig,
-    paths: {
-        ...authDoc.paths,
-        ...userDoc.paths,
-        ...cardDoc.paths,
-        ...deckDoc.paths,
-    }
+  ...swaggerConfig,
+  paths: {
+    ...authDoc.paths,
+    ...userDoc.paths,
+    ...cardDoc.paths,
+    ...deckDoc.paths,
+  },
 }

@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import { decksController } from './decks.controller.js';
-import { authenticateToken } from '../auth/route/auth.route.js';
+import { Router } from 'express'
+import { decksController } from './decks.controller.js'
+import { authenticateToken } from '../auth/route/auth.route.js'
 
-const deckRouter = Router();
+const deckRouter = Router()
 
 /**
  * Créer un nouveau deck pour l'utilisateur authentifié.
@@ -17,7 +17,7 @@ const deckRouter = Router();
  *
  * @throws {Error} Erreurs métier liées à la création du deck
  */
-deckRouter.post('/decks', authenticateToken, decksController.create);
+deckRouter.post('/decks', authenticateToken, decksController.create)
 
 /**
  * Récupérer tous les decks appartenant à l'utilisateur authentifié.
@@ -31,7 +31,7 @@ deckRouter.post('/decks', authenticateToken, decksController.create);
  *
  * @throws {Error} Erreur lors de la récupération des decks
  */
-deckRouter.get('/decks/mine', authenticateToken, decksController.liste);
+deckRouter.get('/decks/mine', authenticateToken, decksController.liste)
 
 /**
  * Récupérer un deck par son identifiant.
@@ -73,7 +73,7 @@ deckRouter.get('/decks/:id', authenticateToken, decksController.read)
  *
  * @throws {Error} Erreurs métier liées à la mise à jour
  */
-deckRouter.patch('/decks/:id', authenticateToken, decksController.update);
+deckRouter.patch('/decks/:id', authenticateToken, decksController.update)
 
 /**
  * Supprimer un deck appartenant à l'utilisateur authentifié.
@@ -91,6 +91,6 @@ deckRouter.patch('/decks/:id', authenticateToken, decksController.update);
  *
  * @throws {Error} Deck non trouvé ou accès refusé
  */
-deckRouter.delete('/decks/:id', authenticateToken, decksController.delete);
+deckRouter.delete('/decks/:id', authenticateToken, decksController.delete)
 
-export default deckRouter;
+export default deckRouter
