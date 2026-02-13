@@ -1,4 +1,4 @@
-import { PokemonType } from '../generated/prisma/client'
+import { PokemonType } from '../generated/prisma'
 
 /**
  * Règles du jeu Pokemon TCG
