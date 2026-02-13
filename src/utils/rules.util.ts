@@ -1,7 +1,7 @@
 import { PokemonType } from '../generated/prisma/client'
 
 /**
- * Règles du jeu Pokemon TCG
+ * Règles du Jeu Pokemon TCG
  * Contient les fonctions pures pour le calcul des dégâts et le système de types
  */
 
