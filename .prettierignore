@@ -5,3 +5,4 @@ coverage
 .env
 public
 src/generated/
+commitlint.config.js
