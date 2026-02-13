@@ -14,4 +14,4 @@ RUN npx prisma migrate
 
 RUN npm run build
 
-CMD ["npx prisma migrate deploy && npm run start"]
+CMD ["npm run db:migrate && npm run start"]
