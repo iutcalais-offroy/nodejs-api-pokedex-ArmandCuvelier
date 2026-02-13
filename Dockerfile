@@ -6,6 +6,8 @@ RUN npm install
 
 COPY . .
 
+RUN npx prisma generate
+
 RUN npm run build
 
-CMD sh -c "npx prisma generate && node dist/index.js"
+CMD ["node", "dist/index.js"]
