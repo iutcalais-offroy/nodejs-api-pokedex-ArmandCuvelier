@@ -54,13 +54,24 @@ async function main() {
     throw new Error('Failed to create users')
   }
 
-  console.log('✅ Created users:', redUser.username, blueUser.username)
+  console.log('Created users:', redUser.username, blueUser.username)
 
   const pokemonDataPath = join(__dirname, 'data', 'pokemon.json')
   const pokemonJson = readFileSync(pokemonDataPath, 'utf-8')
   const pokemonData: CardModel[] = JSON.parse(pokemonJson)
 
   console.log(`Created ${pokemonData.length} Pokemon cards`)
+
+  await prisma.card.createMany({
+    data: pokemonData.map((pokemon) => ({
+      name: pokemon.name,
+      hp: pokemon.hp,
+      attack: pokemon.attack,
+      type: pokemon.type,
+      pokedexNumber: pokemon.pokedexNumber,
+      imgUrl: pokemon.imgUrl ?? null,
+    })),
+  })
 
   //get the id of bleu and red
   const red_id = redUser.id
