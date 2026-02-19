@@ -1,16 +1,14 @@
-name: CI - Tests & Build
+name: CI
 
 on:
   pull_request:
-    branches:
-      - main
-      - develop
+    branches: [main]
   push:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
-  test-and-build:
+  test:
+    name: Test and Lint
     runs-on: ubuntu-latest
 
     env:
@@ -24,20 +22,22 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-
-      - name: Clean npm cache
-        run: npm cache clean --force
+          cache: 'npm'
 
       - name: Install dependencies
-        run: |
-          rm -rf node_modules package-lock.json
-          npm install --legacy-peer-deps
+        run: npm install
 
       - name: Generate Prisma Client
         run: npx prisma generate
 
-      - name: Run TypeScript type check
-        run: npm run ts:check
+      - name: Run linter
+        run: npm run lint
 
-      - name: Build project
-        run: npm run build
+      - name: Check code formatting
+        run: npm run format:check
+
+      - name: Run type checking
+        run: npm run typecheck
+
+      - name: Run tests
+        run: npm run test

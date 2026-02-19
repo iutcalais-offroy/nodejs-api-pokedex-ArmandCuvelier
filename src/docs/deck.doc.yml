@@ -17,12 +17,12 @@ paths:
               basicDeck:
                 summary: Création d'un deck basique
                 value:
-                  name: "Starter Deck"
+                  name: 'Starter Deck'
                   cardIds: [1, 5, 12, 23, 34]
               advancedDeck:
                 summary: Création d'un deck avancé
                 value:
-                  name: "Dragon Deck"
+                  name: 'Dragon Deck'
                   cardIds: [2, 4, 7, 9, 11, 15, 18, 22, 25, 28]
       responses:
         '201':
@@ -36,10 +36,10 @@ paths:
                   summary: Deck créé
                   value:
                     id: 5
-                    name: "Starter Deck"
+                    name: 'Starter Deck'
                     userId: 9
-                    createdAt: "2026-01-30T12:53:47.228Z"
-                    updatedAt: "2026-01-30T12:53:47.228Z"
+                    createdAt: '2026-01-30T12:53:47.228Z'
+                    updatedAt: '2026-01-30T12:53:47.228Z'
         '400':
           description: Données invalides
           content:
@@ -48,7 +48,7 @@ paths:
                 missingName:
                   summary: Nom manquant
                   value:
-                    error: "Le nom du deck est requis"
+                    error: 'Le nom du deck est requis'
                 invalidCards:
                   summary: IDs de cartes invalides
                   value:
@@ -70,7 +70,7 @@ paths:
                 serverError:
                   summary: Erreur interne
                   value:
-                    error: "Une erreur est survenue lors de la création du deck"
+                    error: 'Une erreur est survenue lors de la création du deck'
 
   /decks/mine:
     get:
@@ -94,15 +94,15 @@ paths:
                   summary: Utilisateur avec plusieurs decks
                   value:
                     - id: 5
-                      name: "Starter Deck"
+                      name: 'Starter Deck'
                       userId: 9
-                      createdAt: "2026-01-30T12:53:47.228Z"
-                      updatedAt: "2026-01-30T12:53:47.228Z"
+                      createdAt: '2026-01-30T12:53:47.228Z'
+                      updatedAt: '2026-01-30T12:53:47.228Z'
                     - id: 8
-                      name: "Updated Deck Name"
+                      name: 'Updated Deck Name'
                       userId: 9
-                      createdAt: "2026-02-05T19:51:44.966Z"
-                      updatedAt: "2026-02-05T20:34:06.457Z"
+                      createdAt: '2026-02-05T19:51:44.966Z'
+                      updatedAt: '2026-02-05T20:34:06.457Z'
                 noDecks:
                   summary: Utilisateur sans decks
                   value: []
@@ -114,7 +114,7 @@ paths:
                 unauthorized:
                   summary: Token invalide
                   value:
-                    error: "Token invalide ou expiré"
+                    error: 'Token invalide ou expiré'
         '500':
           description: Erreur serveur
           content:
@@ -123,7 +123,7 @@ paths:
                 serverError:
                   summary: Erreur interne
                   value:
-                    error: "Impossible de récupérer les decks"
+                    error: 'Impossible de récupérer les decks'
 
   /decks/{id}:
     get:
@@ -155,10 +155,10 @@ paths:
                   summary: Deck trouvé
                   value:
                     id: 5
-                    name: "Starter Deck"
+                    name: 'Starter Deck'
                     userId: 9
-                    createdAt: "2026-01-30T12:53:47.228Z"
-                    updatedAt: "2026-01-30T12:53:47.228Z"
+                    createdAt: '2026-01-30T12:53:47.228Z'
+                    updatedAt: '2026-01-30T12:53:47.228Z'
         '401':
           description: Non authentifié
           content:
@@ -167,7 +167,7 @@ paths:
                 noAuth:
                   summary: Non authentifié
                   value:
-                    error: "Authentification requise"
+                    error: 'Authentification requise'
         '403':
           description: Accès refusé
           content:
@@ -185,7 +185,7 @@ paths:
                 notFound:
                   summary: Deck inexistant
                   value:
-                    error: "Deck non trouvé"
+                    error: 'Deck non trouvé'
         '500':
           description: Erreur serveur
           content:
@@ -194,7 +194,7 @@ paths:
                 serverError:
                   summary: Erreur interne
                   value:
-                    error: "Erreur lors de la récupération du deck"
+                    error: 'Erreur lors de la récupération du deck'
 
     patch:
       tags:
@@ -223,11 +223,11 @@ paths:
               updateName:
                 summary: Modification du nom uniquement
                 value:
-                  name: "Updated Deck Name"
+                  name: 'Updated Deck Name'
               updateCards:
                 summary: Modification des cartes
                 value:
-                  name: "Updated Deck Name"
+                  name: 'Updated Deck Name'
                   cardIds: [3, 6, 9, 12, 15, 18]
       responses:
         '200':
@@ -241,10 +241,10 @@ paths:
                   summary: Deck mis à jour avec succès
                   value:
                     id: 8
-                    name: "Updated Deck Name"
+                    name: 'Updated Deck Name'
                     userId: 9
-                    createdAt: "2026-02-05T19:51:44.966Z"
-                    updatedAt: "2026-02-05T20:34:06.457Z"
+                    createdAt: '2026-02-05T19:51:44.966Z'
+                    updatedAt: '2026-02-05T20:34:06.457Z'
         '400':
           description: Données invalides
           content:
@@ -253,7 +253,7 @@ paths:
                 invalidData:
                   summary: Données incorrectes
                   value:
-                    error: "Le nom du deck ne peut pas être vide"
+                    error: 'Le nom du deck ne peut pas être vide'
         '401':
           description: Non authentifié
           content:
@@ -262,7 +262,7 @@ paths:
                 noAuth:
                   summary: Token manquant
                   value:
-                    error: "Authentification requise"
+                    error: 'Authentification requise'
         '403':
           description: Accès refusé
           content:
@@ -271,7 +271,7 @@ paths:
                 forbidden:
                   summary: Pas le propriétaire
                   value:
-                    error: "Vous ne pouvez modifier que vos propres decks"
+                    error: 'Vous ne pouvez modifier que vos propres decks'
         '404':
           description: Deck non trouvé
           content:
@@ -289,7 +289,7 @@ paths:
                 serverError:
                   summary: Erreur interne
                   value:
-                    error: "Erreur lors de la mise à jour du deck"
+                    error: 'Erreur lors de la mise à jour du deck'
 
     delete:
       tags:
@@ -317,7 +317,7 @@ paths:
                 deleted:
                   summary: Suppression réussie
                   value:
-                    message: "Deck supprimé avec succès"
+                    message: 'Deck supprimé avec succès'
         '401':
           description: Non authentifié
           content:
@@ -326,7 +326,7 @@ paths:
                 noAuth:
                   summary: Non authentifié
                   value:
-                    error: "Authentification requise"
+                    error: 'Authentification requise'
         '403':
           description: Accès refusé
           content:
@@ -335,7 +335,7 @@ paths:
                 forbidden:
                   summary: Deck d'un autre utilisateur
                   value:
-                    error: "Vous ne pouvez supprimer que vos propres decks"
+                    error: 'Vous ne pouvez supprimer que vos propres decks'
         '404':
           description: Deck non trouvé
           content:
@@ -344,7 +344,7 @@ paths:
                 notFound:
                   summary: Deck inexistant
                   value:
-                    error: "Deck non trouvé"
+                    error: 'Deck non trouvé'
         '500':
           description: Erreur serveur
           content:
@@ -353,4 +353,4 @@ paths:
                 serverError:
                   summary: Erreur lors de la suppression
                   value:
-                    error: "Impossible de supprimer le deck"
+                    error: 'Impossible de supprimer le deck'

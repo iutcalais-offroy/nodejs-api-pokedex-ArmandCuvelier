@@ -16,11 +16,11 @@ paths:
                   $ref: '#/components/schemas/User'
                 example:
                   - id: 1
-                    name: "red"
-                    email: "redlice@example.com"
+                    name: 'red'
+                    email: 'redlice@example.com'
                   - id: 2
-                    name: "blue"
-                    email: "blue@example.com"
+                    name: 'blue'
+                    email: 'blue@example.com'
 
     post:
       tags:
@@ -28,7 +28,7 @@ paths:
       summary: Créer un utilisateur
       description: Crée un nouvel utilisateur (nécessite authentification)
       security:
-        - bearerAuth: [ ]
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -42,15 +42,15 @@ paths:
               properties:
                 name:
                   type: string
-                  example: "red"
+                  example: 'red'
                 email:
                   type: string
                   format: email
-                  example: "red@example.com"
+                  example: 'red@example.com'
                 password:
                   type: string
                   format: password
-                  example: "password123"
+                  example: 'password123'
       responses:
         '201':
           description: Utilisateur créé

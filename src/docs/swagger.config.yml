@@ -22,7 +22,7 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksImVtYWlsIjoicmVkQGV4YW1wbGUuY29tIiwiaWF0IjoxNzcwMzg0NDQ4LCJleHAiOjE3NzA5ODkyNDh9.qEPYgvKpKulbWBC-BrhGD3BEwAe_sykU9HxD8ivRojk"
+      description: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjksImVtYWlsIjoicmVkQGV4YW1wbGUuY29tIiwiaWF0IjoxNzcwMzg0NDQ4LCJleHAiOjE3NzA5ODkyNDh9.qEPYgvKpKulbWBC-BrhGD3BEwAe_sykU9HxD8ivRojk'
 
   schemas:
     User:
@@ -33,11 +33,11 @@ components:
           example: 1
         name:
           type: string
-          example: "red"
+          example: 'red'
         email:
           type: string
           format: email
-          example: "red@example.com"
+          example: 'red@example.com'
 
     Error:
       type: object

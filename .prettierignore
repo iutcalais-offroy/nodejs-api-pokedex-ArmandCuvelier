@@ -1,0 +1,9 @@
+node_modules
+dist
+build
+coverage
+.env
+public
+src/generated/**
+commitlint.config.js
+tests

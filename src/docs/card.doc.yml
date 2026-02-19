@@ -3,7 +3,7 @@ paths:
     get:
       tags:
         - Cards
-      summary : Récupérer de toutes les cartes
+      summary: Récupérer de toutes les cartes
       description: Récupère la liste complète des cartes
       responses:
         '200':
@@ -15,11 +15,11 @@ paths:
                 items:
                   $ref: '#/components/schemas/Cards'
                 example:
-                  -     id: 1
-                        name: "Bulbasaur"
-                        hp: 45
-                        attack: 49
-                        type": "Grass"
-                        pokedexNumber: 1
-                        createdAt: "2026-01-30T12:53:46.619Z"
-                        updatedAt: "2026-01-30T12:53:46.619Z"
+                  - id: 1
+                    name: 'Bulbasaur'
+                    hp: 45
+                    attack: 49
+                    type": 'Grass'
+                    pokedexNumber: 1
+                    createdAt: '2026-01-30T12:53:46.619Z'
+                    updatedAt: '2026-01-30T12:53:46.619Z'
