@@ -18,6 +18,15 @@ export const deckCardsService = {
     return false
   },
 
+  /**
+   * Retourne les identifiants de toutes les cartes d'un deck.
+   *
+   * @param {number} deck_id - Identifiant du deck
+   *
+   * @returns {Promise<number[]>} Liste des identifiants de cartes
+   *
+   * @throws {Error} Erreur lors de la récupération des cartes
+   */
   async getCardsByDeck(deck_id: number) {
     return deckCardsRepository.getCardsByDeck(deck_id)
   },

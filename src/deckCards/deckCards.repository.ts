@@ -17,6 +17,15 @@ export const deckCardsRepository = {
     return results.length
   },
 
+  /**
+   * Retourne les identifiants de toutes les cartes associées à un deck.
+   *
+   * @param {number} deck_id - Identifiant du deck
+   *
+   * @returns {Promise<number[]>} Liste des identifiants de cartes
+   *
+   * @throws {Error} Erreur lors de l'accès à la base de données
+   */
   async getCardsByDeck(deck_id: number) {
     const results = await prisma.deckCard.findMany({
       where: { deckId: deck_id },
