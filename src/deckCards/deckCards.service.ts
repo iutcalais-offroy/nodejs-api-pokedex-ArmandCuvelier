@@ -17,4 +17,8 @@ export const deckCardsService = {
     }
     return false
   },
+
+  async getCardsByDeck(deck_id: number) {
+    return deckCardsRepository.getCardsByDeck(deck_id)
+  },
 }

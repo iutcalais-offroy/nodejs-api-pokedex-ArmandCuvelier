@@ -16,4 +16,12 @@ export const deckCardsRepository = {
     })
     return results.length
   },
+
+  async getCardsByDeck(deck_id: number) {
+    const results = await prisma.deckCard.findMany({
+      where: { deckId: deck_id },
+      select: { cardId: true },
+    })
+    return results.map((r) => r.cardId)
+  },
 }
